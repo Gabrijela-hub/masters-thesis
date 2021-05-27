@@ -24,8 +24,24 @@ Fit_Three_Factor <- cfa(model = Three_Factor, data = CFA)
 
 summary(Fit_Three_Factor, fit.measures=TRUE, standardized=TRUE)
 
-# comparing fit of the 2 models
-anova(Fit_One_Factor, Fit_Three_Factor)
 
-# conclusion: 3-factor solution has a better fit
+
+#defining bifactor model
+
+Bifactor <-'
+Benefits =~ Attitudes_Healthy + Attitudes_Environment + Attitudes_Animal_Welfare
+Satisfaction =~ Attitudes_Tasty + Attitudes_Enjoyable + Attitudes_Filling
+Practicality =~ Attitudes_Convenient + Attitudes_Cheap + Attitudes_Local
+Attitudes =~ Attitudes_Healthy + Attitudes_Environment + Attitudes_Animal_Welfare + Attitudes_Tasty + Attitudes_Enjoyable + Attitudes_Convenient + Attitudes_Cheap + Attitudes_Filling + Attitudes_Local
+'
+
+# fitting bifactor model
+
+Fit_Bifactor <- cfa(model = Bifactor, data = CFA, orthogonal=T)
+summary(Fit_Bifactor, fit.measures=TRUE, standardized=TRUE)
+
+# comparing fit of the 3 models
+anova(Fit_One_Factor, Fit_Three_Factor, Fit_Bifactor)
+
+# conclusion: bifactor solution is the most fitting
 
