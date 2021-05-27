@@ -3,8 +3,7 @@ library(psych)
 library(plyr)
 library(dplyr)
 library(tidyverse)
-library(ggpubr)
-library(FSA)
+
 
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("kassambara/ggpubr")
@@ -94,7 +93,6 @@ dunnTest(Practicality_Attitudes~Diet_Type,
 # significant difference between all dietary groups
 
 
-omnivores 
 
 
 
