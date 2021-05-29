@@ -45,3 +45,9 @@ anova(Fit_One_Factor, Fit_Three_Factor, Fit_Bifactor)
 
 # conclusion: bifactor solution is the most fitting
 
+# bifactor model visualisaton
+
+library(semPlot)
+
+semPaths(Fit_Bifactor, layout = "tree2", bifactor = c("Attitudes"))
+
