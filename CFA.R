@@ -1,7 +1,8 @@
 
-
 library(lavaan)
 library(psych)
+
+CFA <- read.csv("Data for CFA.csv")
 
 # defining 1-factor model
 One_Factor <- ' Attitudes =~ Attitudes_Healthy + Attitudes_Environment + Attitudes_Animal_Welfare + Attitudes_Tasty + Attitudes_Enjoyable + Attitudes_Convenient + Attitudes_Cheap + Attitudes_Filling + Attitudes_Local'
