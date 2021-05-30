@@ -1,6 +1,6 @@
 
 # read data
-cookies <- read.csv("Istraživanje o keksima with names.csv")
+cookies <- read.csv("Cookies Data Set.csv")
 # N = 1322
 
 
