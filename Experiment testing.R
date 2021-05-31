@@ -86,11 +86,11 @@ acceptability_t_exp_1 <- t.test(control_exp_1$Acceptabiliy_Average,
                                 var.equal = TRUE)
 
 wtp_t_exp_1 <- t.test(control_exp_1$WTP, 
-                      vegan_exp_1$WTF, 
+                      vegan_exp_1$WTF, paired=FALSE, 
                       var.equal = TRUE)
 
 expected_price_t_exp_1 <- t.test(control_exp_1$Expected_price, 
-                                 vegan_exp_1$Expected_price, paired=FALSE,
+                                 vegan_exp_1$Expected_price, 
                                  var.equal = TRUE)
 
 likely_to_buy_t_exp_1 <- t.test(control_exp_1$Likely_To_Buy, 
