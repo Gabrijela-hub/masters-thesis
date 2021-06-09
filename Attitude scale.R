@@ -41,11 +41,11 @@ Attitude_Scale_DF <- cookies %>%
 # N = 1166 
 
                         
-alpha(Attitude_Scale_DF)
+alpha(Attitude_Scale_DF[,2:10])
 
 # Cronbach Alpha for the entire scale alpha = 0.88
 
-omega(Attitude_Scale_DF)
+omega(Attitude_Scale_DF[,2:10])
 
 # Omega Hierarchical (one factor) = 0.75
 # Omega Total (3 factors) = 0.92
