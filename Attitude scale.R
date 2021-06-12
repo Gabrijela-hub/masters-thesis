@@ -11,6 +11,9 @@ devtools::install_github("kassambara/ggpubr")
 # load the data
 cookies <- read.csv("Cookies Data Set.csv")
 
+# remove participants that didn't complete Attitudes questionnaire
+cookies <- cookies[rowSums(is.na(cookies)) < 20,]
+# N = 1166
 
 Subset_Attitudes <- cookies[ , 12:20]
 
