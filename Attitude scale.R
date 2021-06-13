@@ -55,10 +55,19 @@ omega(Attitude_Scale_DF[,2:10])
 
 
 # descriptives for Attitudes subscales
-describe(Attitude_Scale_DF$Benefits_Attitudes)
-describe(Attitude_Scale_DF$Satisfaction_Attitudes)
-describe(Attitude_Scale_DF$Practicality_Attitudes)
+descriptives_benefits <- describeBy(Attitude_Scale_DF$Benefits_Attitudes, 
+                                    Attitude_Scale_DF$Diet_Type)
+descriptives_satisfaction <- describeBy(Attitude_Scale_DF$Satisfaction_Attitudes, 
+                                        Attitude_Scale_DF$Diet_Type)
+descriptives_practicality <- describeBy(Attitude_Scale_DF$Practicality_Attitudes, 
+                                        Attitude_Scale_DF$Diet_Type)
 
+attitudes_descriptives <- map_df(list(descriptives_benefits,
+                                      descriptives_satisfaction,
+                                      descriptives_practicality),
+                                 rbind)
+
+attitudes_descriptives
 # plotting variables
 hist(Attitude_Scale_DF$Benefits_Attitudes)
 hist(Attitude_Scale_DF$Satisfaction_Attitudes)

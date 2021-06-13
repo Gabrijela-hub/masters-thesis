@@ -118,7 +118,7 @@ cohen_d_df <- rbind(cohen_acceptability,
                   cohen_wtp,
                   cohen_expected_price,
                   cohen_likely_to_buy)
-
+cohen_d_df
 
 # put t-test results in a df
 
@@ -134,6 +134,20 @@ rownames(t_tests) <- c("Acceptability",
                        "WTP", 
                        "Expected_Price", 
                        "Likely_To_Buy")
+
+# get descriptives by group for experiment 1
+descriptives_acc <- describeBy(experiment_1$Acceptabiliy_Average, group = experiment_1$Manipulation_Groups)
+descriptives_wtp <- describeBy(experiment_1$WTP, group = experiment_1$Manipulation_Groups)
+descriptives_expected <- describeBy(experiment_1$Expected_price, group = experiment_1$Manipulation_Groups)
+descriptives_likely <- describeBy(experiment_1$Likely_To_Buy, group = experiment_1$Manipulation_Groups)
+
+
+exp_1_descriptives <- map_df(list(descriptives_acc,
+                            descriptives_wtp,
+                            descriptives_expected,
+                            descriptives_likely), rbind)
+
+exp_1_descriptives
 
 library("Hmisc")
 
@@ -171,6 +185,8 @@ experiment_2 <- experiment_2[-which(experiment_2$WTP %in%
                                       outliers_WTP_2),]
 # N = 525
 
+
+outliers_expected_price_2
 # plot again
 hist(experiment_2$Expected_price)
 hist(experiment_2$WTP)
@@ -211,9 +227,22 @@ anova_exp_2 <- map_df(list(acceptability_anova,
                       anova_summary)
 # not significant
 
+descriptives_acc_exp2 <- describeBy(experiment_2$Acceptabiliy_Average,
+                                    group = experiment_2$Manipulation_Groups)
+descriptives_wtp_exp2 <- describeBy(experiment_2$WTP,
+                                    group = experiment_2$Manipulation_Groups)
+descriptives_expected_exp2 <- describeBy(experiment_2$Expected_price,
+                                         group = experiment_2$Manipulation_Groups)
+descriptives_likely_exp2 <- describeBy(experiment_2$Likely_To_Buy, 
+                                       group = experiment_2$Manipulation_Groups)
 
 
-  
+exp_2_descriptives <- map_df(list(descriptives_acc_exp2,
+                                  descriptives_wtp_exp2,
+                                  descriptives_expected_exp2,
+                                  descriptives_likely_exp2), 
+                             rbind)
+exp_2_descriptives
   
   
   
