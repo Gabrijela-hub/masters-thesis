@@ -1,7 +1,7 @@
 
 library(pricesensitivitymeter)
 library(dplyr)
-
+library(ggplot2)
 # defining data frames ==== 
 
 Westendorp_control <- experiment_1 %>% 
@@ -69,4 +69,38 @@ psm_vegan_a <- psm_analysis(toocheap='Westendorp_Too_Cheap',
 plot_control <- psm_plot(psm_control, label_idp = F, label_opp = F)
 plot_vegan <- psm_plot(psm_vegan, label_idp = F, label_opp = F)
 
+plot_control + theme_minimal()
 
+
+plot_control_finished <- psm_plot(psm_control, 
+                         label_idp = F, label_opp = F, 
+                         pricerange_alpha = 0.05,
+                         line_type = c("too cheap" = "solid",
+                                       "not cheap" = "solid",
+                                       "not expensive" = "solid",
+                                       "too expensive" = "solid"),
+                         line_color = c("too cheap" = "#66a182",
+                                        "not cheap" = "#00798c",
+                                        "not expensive" = "#edae49",
+                                        "too expensive" = "#d1495b")) + 
+                          theme_classic() + ggtitle("Control")+
+                          labs(y= "Cumulative Percentage (%)", x = "Price")+ 
+                          theme(plot.title = element_text(hjust = 0.5),legend.position = c(0.8, 0.4)) 
+                  
+plot_vegan_finished <- psm_plot(psm_vegan, 
+                                  label_idp = F, label_opp = F, 
+                                  pricerange_alpha = 0.05,
+                                  line_type = c("too cheap" = "solid",
+                                                "not cheap" = "solid",
+                                                "not expensive" = "solid",
+                                                "too expensive" = "solid"),
+                                  line_color = c("too cheap" = "#66a182",
+                                                 "not cheap" = "#00798c",
+                                                 "not expensive" = "#edae49",
+                                                 "too expensive" = "#d1495b")) + 
+                                  theme_classic() + 
+                                  labs(title = "Vegan",y= "Cumulative Percentage (%)", x = "Price")+ 
+                                  theme(legend.position = c(0.8, 0.4)) 
+                                  
+plot_control_finished
+  
