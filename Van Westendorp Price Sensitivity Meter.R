@@ -83,7 +83,7 @@ plot_control_finished <- psm_plot(psm_control,
                                         "not cheap" = "#00798c",
                                         "not expensive" = "#edae49",
                                         "too expensive" = "#d1495b")) + 
-                          theme_classic() + ggtitle("Control")+
+                          theme_classic() +
                           labs(y= "Cumulative Percentage (%)", x = "Price")+ 
                           theme(plot.title = element_text(hjust = 0.5),legend.position = c(0.8, 0.4)) 
                   
@@ -99,8 +99,21 @@ plot_vegan_finished <- psm_plot(psm_vegan,
                                                  "not expensive" = "#edae49",
                                                  "too expensive" = "#d1495b")) + 
                                   theme_classic() + 
-                                  labs(title = "Vegan",y= "Cumulative Percentage (%)", x = "Price")+ 
+                                  labs(y= "Cumulative Percentage (%)", x = "Price")+ 
                                   theme(legend.position = c(0.8, 0.4)) 
-                                  
-plot_control_finished
+   
+
+plot_vegan_finished
+                               
+# Save figures
+
+ggsave(filename = "van Westendorp Control.png", 
+           plot = plot_control_finished,
+         device = "png")
   
+
+ggsave(filename = "van Westendorp Vegan.png", 
+       plot = plot_vegan_finished,
+       device = "png")
+
+

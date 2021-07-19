@@ -54,6 +54,19 @@ omega(Attitude_Scale_DF[,2:10])
 # Omega Total (3 factors) = 0.92
 
 
+# reliability: Benefits
+alpha(Attitude_Scale_DF[,2:4])
+# Cronbach Alpha = 0.8
+
+# reliability: Satisfaction
+alpha(Attitude_Scale_DF %>% select(5:6,9))
+# Cronbach Alpha = 0.89
+
+# reliability: Practicality
+alpha(Attitude_Scale_DF %>% select(7:8,10))
+# Cronbach Alpha = 0.71
+
+
 # descriptives for Attitudes subscales
 descriptives_benefits <- describeBy(Attitude_Scale_DF$Benefits_Attitudes, 
                                     Attitude_Scale_DF$Diet_Type)
