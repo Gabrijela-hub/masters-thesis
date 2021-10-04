@@ -1,12 +1,8 @@
 
 # read data
 cookies <- read.csv("Cookies Data Set.csv")
-# N = 1322
-
-
-# remove participants under the age od 18 
-cookies <- cookies[cookies$Age>17,]
 # N = 1305
+
 
 # remove participants that didn't complete Attitudes questionnaire
 cookies <- cookies[rowSums(is.na(cookies)) < 20,]

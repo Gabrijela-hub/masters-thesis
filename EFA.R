@@ -1,4 +1,6 @@
 
+EFA <- read.csv("Data for EFA.csv")
+
 # PRINCIPAL COMPONENT ANALYSIS
 
 jmv::pca(
