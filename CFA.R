@@ -50,5 +50,27 @@ anova(Fit_One_Factor, Fit_Three_Factor, Fit_Bifactor)
 
 library(semPlot)
 
-semPaths(Fit_Bifactor, layout = "tree2", bifactor = c("Attitudes"))
 
+labels <- c('Health',
+            'Environment',
+            'Animals',
+            'Taste',
+            'Enjoyment',
+            'Satiety',
+            'Convenient',
+            'Cheap',
+            'Local', 
+            'Benefits',
+            'Satisfaction',
+            'Practicality',
+            'Attitudes')
+
+semPaths(Fit_Bifactor, 
+         label.scale = FALSE, 
+         sizeMan2 = 4,
+         sizeLat = 10,
+         sizeMan = 10, layout = "tree2", nodeLabels=labels, bifactor = c("Attitudes"), rotation=2)
+
+
+# factor loadings
+inspect(Fit_Bifactor,what="std")$lambda

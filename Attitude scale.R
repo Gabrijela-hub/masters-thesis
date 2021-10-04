@@ -74,7 +74,10 @@ descriptives_satisfaction <- describeBy(Attitude_Scale_DF$Satisfaction_Attitudes
                                         Attitude_Scale_DF$Diet_Type)
 descriptives_practicality <- describeBy(Attitude_Scale_DF$Practicality_Attitudes, 
                                         Attitude_Scale_DF$Diet_Type)
-
+descriptives_attitudes <- describeBy(Attitude_Scale_DF$Attitudes_Average, 
+                                     Attitude_Scale_DF$Diet_Type)
+  
+  
 attitudes_descriptives <- map_df(list(descriptives_benefits,
                                       descriptives_satisfaction,
                                       descriptives_practicality),
@@ -95,10 +98,56 @@ bartlett.test(Diet_Type~Practicality_Attitudes, Attitude_Scale_DF)
 # variances between Diet_Types are unequal
 
 #  visualisation
+
+
+library(ggridges)
+theme_set(theme_minimal())
+
+ggplot(Attitude_Scale_DF, aes(x = Benefits_Attitudes, y = Diet_Type)) + 
+  geom_density_ridges(scale = 0.6)
+
+Attitude_Scale_DF$Diet_Type <- as.factor(Attitude_Scale_DF$Diet_Type)
+str(Attitude_Scale_DF)
+
+
+ggplot(Attitude_Scale_DF, aes(x = Benefits_Attitudes, y = Diet_Type)) +
+  geom_density_ridges(aes(fill = Diet_Type), alpha = 0.9, scale=1.5) +
+  scale_fill_manual(values = c("#578A36", "#8EB355", "#C8D9AD")) +
+  scale_y_discrete(labels=c("1" = "Svejedi", "2" = "Vegetarijanci","3" = "Vegani"), 
+                   limits=c("3","2","1"), name="Vrsta prehrane")+
+  labs(x="Dobrobit")+theme_ridges(grid = FALSE, center_axis_labels = TRUE) +
+  theme(legend.position = "none")
+
+ggplot(Attitude_Scale_DF, aes(x = Satisfaction_Attitudes, y = Diet_Type)) +
+  geom_density_ridges(aes(fill = Diet_Type), alpha = 0.9, scale=1.5) +
+  scale_fill_manual(values = c("#578A36", "#8EB355", "#C8D9AD")) +
+  scale_y_discrete(labels=c("1" = "Svejedi", "2" = "Vegetarijanci","3" = "Vegani"), 
+                   limits=c("3","2","1"), name="Vrsta prehrane")+
+  labs(x="Uzitak")+theme_ridges(grid = FALSE, center_axis_labels = TRUE) + 
+  theme(legend.position = "none")
+
+ggplot(Attitude_Scale_DF, aes(x = Practicality_Attitudes, y = Diet_Type)) +
+  geom_density_ridges(aes(fill = Diet_Type), alpha = 0.9, scale=1.5) +
+  scale_fill_manual(values = c("#578A36", "#8EB355", "#C8D9AD")) +
+  scale_y_discrete(labels=c("1" = "Svejedi", "2" = "Vegetarijanci","3" = "Vegani"), 
+                   limits=c("3","2","1"), name="Vrsta prehrane")+
+  labs(x="Prakticnost")+theme_ridges(grid = FALSE, center_axis_labels = TRUE) + 
+  theme(legend.position = "none")
+
+ggplot(Attitude_Scale_DF, aes(x = Attitudes_Average, y = Diet_Type)) +
+  geom_density_ridges(aes(fill = Diet_Type), alpha = 0.9, scale=1.5) +
+  scale_fill_manual(values = c("#578A36", "#8EB355", "#C8D9AD")) +
+  scale_y_discrete(labels=c("1" = "Svejedi", "2" = "Vegetarijanci","3" = "Vegani"), 
+                   limits=c("3","2","1"), name="Vrsta prehrane")+
+  labs(x="Stavovi ukupno")+theme_ridges(grid = FALSE, center_axis_labels = TRUE) + 
+  theme(legend.position = "none")
+
+
 ggboxplot(Attitude_Scale_DF, x = "Diet_Type", y = "Benefits_Attitudes", 
           color = "Diet_Type", 
           order = c("1", "2", "3"),
           ylab = "Benefits", xlab = "Diet Type")
+
 
 ggboxplot(Attitude_Scale_DF, x = "Diet_Type", y = "Satisfaction_Attitudes", 
           color = "Diet_Type", 
@@ -114,13 +163,14 @@ ggboxplot(Attitude_Scale_DF, x = "Diet_Type", y = "Practicality_Attitudes",
 kruskal.test(Diet_Type~Benefits_Attitudes, data=Attitude_Scale_DF)
 kruskal.test(Diet_Type~Satisfaction_Attitudes, data=Attitude_Scale_DF)
 kruskal.test(Diet_Type~Practicality_Attitudes, data=Attitude_Scale_DF)
+kruskal.test(Diet_Type~Attitudes_Average, data=Attitude_Scale_DF)
 # all significant
 
 # effect sizes; eta squared
 kruskal_effsize(Diet_Type~Benefits_Attitudes, data=Attitude_Scale_DF)
 kruskal_effsize(Diet_Type~Satisfaction_Attitudes, data=Attitude_Scale_DF)
 kruskal_effsize(Diet_Type~Practicality_Attitudes, data=Attitude_Scale_DF)
-
+kruskal_effsize(Diet_Type~Attitudes_Average, data=Attitude_Scale_DF)
 #effect sizes
 kruskal_effzis
 
@@ -144,9 +194,13 @@ dunnTest(Practicality_Attitudes~Diet_Type,
          method="bonferroni")
 # significant difference between all dietary groups
 
+# Attitudes in general
+dunnTest(Attitudes_Average~Diet_Type, 
+         data=Attitude_Scale_DF,
+         method="bonferroni")
 
-
-
-
+  ggplot(data=cookies)+geom_histogram(mapping = aes(x=Age), 
+                                      color="#578A36", fill="#578A36")+ 
+    theme_pubclean()
 
 

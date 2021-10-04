@@ -154,7 +154,9 @@ library("Hmisc")
 correlations_exp_1 <- rcorr(as.matrix(subset(experiment_1, select = c(29:31,45))))
 correlations_exp_1
 
+test = experiment_1[experiment_1$Manipulation_Groups==2,]
 
+rcorr(as.matrix(subset(test, select = c(29:31,45))))
 
 # EXPERIMENT 2 ====
 
@@ -244,5 +246,16 @@ exp_2_descriptives <- map_df(list(descriptives_acc_exp2,
                              rbind)
 exp_2_descriptives
   
-  
-  
+cor(x=vegan_exp_1$WTP, y=vegan_exp_1$Likely_To_Buy, method = c("pearson")) 
+cor(x=vegan_exp_1$WTP, y=vegan_exp_1$Expected_price, method = c("pearson")) 
+cor(x=vegan_exp_1$Likely_To_Buy, y=vegan_exp_1$Expected_price, method = c("pearson")) 
+
+
+library(Hmisc)
+
+# correlations for the vegan group
+
+rcorr(as.matrix(vegan_exp_1[28:31]),type="pearson")
+
+
+
